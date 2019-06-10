@@ -1,32 +1,49 @@
-// Select color input
+function makeGrid() {
+   console.log("makeGrid is running!")
+
 // Select size input
-var height, width, color;
-// When size is submitted by the user, call makeGrid()
-$('#sizePicker').submit(function (event){
-	event.preventDefault();
-	height = $('#inputHeight').val();
-	width = $('#inputWeight').val();
-	makeGrid(height, width);
-
-function makeGrid (x, y) {
-	$('tr').remove();
-}
-// Your code goes here!
-for(var i = 1; i <= x; i++){
-		$('#pixelCanvas').append('<tr id=table' + i + '></tr>');
-		for(var j = 1; j <= y; j++){
-			$('#table' + i).append('<td></td>');
-		}
-	}
-
-	// When color is selected by the user, add color to grid
-	$('td').click(function addColor(){
-		color = $('#colorPicker').val();
-		if ($(this).attr('style')){
-			$(this).removeAttr('style');
-		} else{
-			$(this).attr('style','background-color:' + color);
-		}
-				
-	});
+var canvas, cell, gridHeight, gridWidth, rows;
+  
+   canvas = $('#pixel_canvas');
+   gridHeight = $('#input_height').val();
+   gridWidth = $('#input_width').val();
+  
+   canvas.children().remove()
+  
+   for (x = 0; x < gridHeight; x++) {
+   canvas.append('<tr></tr>');
+   }
+  
+   rows = $('tr');
+  
+   for (y = 0; y < gridWidth; y++) {
+   rows.append('<td></td>');
+   }
+  
+   cell = canvas.find('td');
 	
+ // When td is clicked by the user, change color of td
+   cell.click(function() {
+       // Select color input
+       console.log("changeColor is running!");
+       var color;
+       color = $("#colorPicker").val();
+       $(this).attr('bgcolor', color);
+	   
+ });
+    
+}
+
+// When size is submitted by the user, call makeGrid()
+var submitQuery;
+
+submitQuery = $('input[type="submit"]')
+
+submitQuery.click(function(event) {
+  event.preventDefault();
+  makeGrid();
+});
+
+
+
+
